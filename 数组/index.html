@@ -1,0 +1,63 @@
+<!--
+ * @Author: wangjunjie9
+ * @Date: 2023-02-06 10:22:37
+ * @LastEditors: wangjunjie9
+ * @LastEditTime: 2023-02-06 11:40:56
+ * @Descripttion: 
+ * @FilePath: /leetcode/数组/index.html
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>删除有序数组中的重复项</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * 删除有序数组中的重复项
+         * 给你一个 升序排列 的数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。
+         * 由于在某些语言中不能改变数组的长度，所以必须将结果放在数组nums的第一部分。更规范地说，如果在删除重复项之后有 k 个元素，那么 nums 的前 k 个元素应该保存最终结果。
+         * 将最终结果插入 nums 的前 k 个位置后返回 k 。
+         * 不要使用额外的空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+        */
+        // 示例 1：
+        // 输入：nums = [1,1,2]
+        // 输出：2, nums = [1,2,_]
+        // 解释：函数应该返回新的长度 2 ，并且原数组 nums 的前两个元素被修改为 1, 2 。不需要考虑数组中超出新长度后面的元素。
+
+        // 示例 2：
+        // 输入：nums = [0,0,1,1,1,2,2,3,3,4]
+        // 输出：5, nums = [0,1,2,3,4]
+        // 解释：函数应该返回新的长度 5 ， 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4 。不需要考虑数组中超出新长度后面的元素。
+
+        var nums = [0,0,1,1,1,2,2,3,3,4]
+        var removeDuplicates = function(nums) {
+            // 方法一：
+            // nums.splice(0, nums.length, ...new Set(nums))
+            // return nums.length
+            
+            // 方法二：
+            // 去重就意味着元素对比, 首先考虑到的是双指针法。声明一个快指针, 用来找不同; 再声明一个慢指针, 用来做元素的替换
+            // 设定两个指针，慢指针做遍历次数统计与元素替换，快指针用来做标识元素判断，如果存在相同元素，对慢指针的元素数组splice
+            let fast = 0
+            let slow = 1
+            while (slow < nums.length) {
+                if (nums[fast] == nums[slow]) {
+                    nums.splice(slow, 1)
+                } else {
+                    fast++
+                    slow++
+                }
+            }
+            return nums.length
+        };
+
+        removeDuplicates(nums)
+        console.log('removeDuplicates', removeDuplicates(nums))
+        console.log('nums', nums)
+    </script>
+</body>
+</html>
